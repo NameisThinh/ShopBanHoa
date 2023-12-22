@@ -44,9 +44,6 @@ const Cart = ({ history }) => {
           <div className="row">
             <div className="col-md-12">
               <div className="card">
-                <div className="card-header">
-                  <h5>Giỏ hàng</h5>
-                </div>
                 <div className="card-body cart">
                   <div className="col-sm-12 empty-cart-cls text-center">
                     {" "}
@@ -59,16 +56,13 @@ const Cart = ({ history }) => {
                     />
                     <h3>
                       <strong>Giỏ hàng của bạn trống</strong>
-                    </h3>
-                    <h4>
-                      Hãy thêm một cái gì đó để giỏ hàng đầy ắp tình yêu thương!
-                    </h4>{" "}
+                    </h3>{" "}
                     <Link
                       to="/"
                       className="btn btn-primary cart-btn-transform m-3"
                       data-abc="true"
                     >
-                      Tiếp tục mua sắm
+                      Quay lại Trang Chủ
                     </Link>
                   </div>
                 </div>
@@ -145,7 +139,7 @@ const Cart = ({ history }) => {
                       <div className="col-4 col-lg-1 mt-4 mt-lg-0">
                         <i
                           id="delete_cart_item"
-                          className="fa fa-trash btn btn-danger"
+                          className="bi bi-x-circle btn btn-danger"
                           onClick={() => removeCartItemHandler(item.product)}
                         ></i>
                       </div>

@@ -10,7 +10,6 @@ exports.newOrder = catchAsyncErrors(async (req, res, next) => {
     orderItems,
     shippingInfo,
     itemsPrice,
-    taxPrice,
     shippingPrice,
     totalPrice,
     paymentInfo,
@@ -20,7 +19,6 @@ exports.newOrder = catchAsyncErrors(async (req, res, next) => {
     orderItems,
     shippingInfo,
     itemsPrice,
-    taxPrice,
     shippingPrice,
     totalPrice,
     paymentInfo,
@@ -36,6 +34,24 @@ exports.newOrder = catchAsyncErrors(async (req, res, next) => {
 
 // Get single order   =>   /api/v1/order/:id
 exports.getSingleOrder = catchAsyncErrors(async (req, res, next) => {
+  const order = await Order.findById(req.params.id).populate(
+    "user",
+    "name email"
+  );
+
+  if (!order) {
+    return next(new ErrorHandler("Không tìm thấy đơn hàng nào có ID này", 404));
+  }
+
+  res.status(200).json({
+    success: true,
+    order,
+  });
+});
+
+
+// Get single order not login   =>   /api/v1/order/:id
+exports.getSinglePrewOrder = catchAsyncErrors(async (req, res, next) => {
   const order = await Order.findById(req.params.id).populate(
     "user",
     "name email"
@@ -103,9 +119,11 @@ async function updateStock(id, quantity) {
   const product = await Product.findById(id);
 
   product.stock = product.stock - quantity;
-
-  await product.save({ validateBeforeSave: false });
+  if (product.stock == 0) {
+    await product.save({ validateBeforeSave: false });
+  }
 }
+
 
 // GET MONTHLY INCOME
 exports.getMonthlyIncome = async (req, res, next) => {
@@ -113,25 +131,23 @@ exports.getMonthlyIncome = async (req, res, next) => {
   const lastYear = new Date(date.setFullYear(date.getFullYear() - 1));
 
   try {
-    let income = await Order.aggregate([
-      { $match: { createdAt: { $gte: lastYear } } },
-      {
-        $project: {
-          // $project : chỉ định các field mong muốn truy vấn.
-          month: { $month: "$createdAt" },
-          sales: "$totalPrice",
-        },
-      },
-      {
-        $group: {
-          // $group: nhóm các document theo điều kiện nhất định
-          _id: "$month",
-          total: { $sum: "$sales" },
-        },
-      },
-    ]);
-    res.status(200).json(income);
+      let income = await Order.aggregate([
+          { $match: { createdAt: { $gte: lastYear } } },
+          {
+              $project: { // $project : chỉ định các field mong muốn truy vấn.
+                  month: { $month: "$createdAt" },
+                  sales: "$totalPrice",
+              },
+          },
+          {
+              $group: { // $group: nhóm các document theo điều kiện nhất định
+                  _id: "$month",
+                  total: { $sum: "$sales" },
+              },
+          },
+      ]);
+      res.status(200).json(income);
   } catch (err) {
-    res.status(500).json(err);
+      res.status(500).json(err);
   }
-};
+}

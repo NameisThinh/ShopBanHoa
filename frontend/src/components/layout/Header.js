@@ -7,6 +7,7 @@ import { logout } from "../../actions/userActions";
 
 import Search from "./Search";
 
+
 const Header = () => {
   const alert = useAlert();
   const dispatch = useDispatch();
@@ -21,20 +22,31 @@ const Header = () => {
 
   return (
     <Fragment>
-      <nav className="navbar row">
-        <div className="col-12 col-md-3">
+      <nav className="navbar">
+        <div className="col-12 col-md-5">
           <div className="navbar-brand">
-            <Link to="/" class="logo">
+            <Link to="/" class="text-light">
               Flowers<span>.</span>
+              <i className="bi bi-flower1"></i>
             </Link>
           </div>
+          <Link to="/" class="text-light ms-3 col-md-0 fs-5">
+            Trang Chủ
+          </Link>
+          <Link to="/product" class="text-light ms-3 col-md-0 fs-5">
+            Sản phẩm
+          </Link>
+          <Link to="/check-dh" class="text-light ms-3 col-md-0 fs-5">
+          <i class="fa fa-info-circle" aria-hidden="true"></i>
+            Kiểm tra đơn hàng
+          </Link>
         </div>
 
-        <div className="col-12 col-md-6 mt-2 mt-md-0">
+        <div className="col-12 col-md-3 mt-3 mt-md-0">
           <Route render={({ history }) => <Search history={history} />} />
         </div>
 
-        <div className="col-12 col-md-3 mt-4 mt-md-0 text-center">
+        <div className="col-12 col-md-4 mt-4 mt-md-0 text-center">
           {user && user.role === "admin" ? (
             <p></p>
           ) : (
@@ -99,12 +111,16 @@ const Header = () => {
             </div>
           ) : (
             !loading && (
-              <Link to="/login" className="btn ml-4" id="login_btn">
+              <Link to="/login" className="btn ml-2" id="login_btn">
+                <i class="fa fa-lock" aria-hidden="true" ></i>
                 Đăng nhập
               </Link>
             )
           )}
+        
+  
         </div>
+             
       </nav>
     </Fragment>
   );

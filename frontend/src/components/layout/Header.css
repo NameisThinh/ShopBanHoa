@@ -34,68 +34,14 @@ section {
 }
 
 .btnn:hover {
-  background: #e84393;
-}
-header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  background: #fff;
-  padding: 2rem 9%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  z-index: 1000;
-  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+  color: black;
 }
 
-header .logo {
-  font-size: 3rem;
-  color: #333;
-  font-size: bolder;
-}
-
-header .logo span {
-  color: var(--pink);
-}
-
-header .navbar a {
-  font-size: 2rem;
-  padding: 0 1.5rem;
-  color: #666;
-}
-
-header .navbar a:hover {
-  color: var(--pink);
-}
-
-header .icons a {
-  font-size: 2.5rem;
-  color: #333;
-  margin-left: 1.5rem;
-}
-
-header .icons a:hover {
-  color: var(--pink);
-}
-
-header #toggler {
-  display: none;
-}
-header .fa-bars {
-  font-size: 3rem;
-  color: #333;
-  border-radius: 0.5rem;
-  cursor: pointer;
-  border: 0.1rem solid rgba(0, 0, 0, 0.3);
-  display: none;
-}
 .home {
   display: flex;
   align-items: center;
   min-height: 100vh;
-  /* background: url(/image/layout.jpg) no-repeat; */
+  /* background-image: url(/images/layout.jpg) no-repeat; */
   background-size: cover;
   background-position: center;
 }
@@ -118,7 +64,7 @@ header .fa-bars {
 
 .home .content p {
   font-size: 1.5rem;
-  color: #999;
+  color: red;
   padding: 1rem 0;
   line-height: 1.5;
 }
@@ -169,7 +115,7 @@ header .fa-bars {
 
 .about .row .content p {
   font-size: 1.5rem;
-  color: #999;
+  color: red;
   padding: 0.5rem 0;
   padding-top: 1rem;
   line-height: 1.5;

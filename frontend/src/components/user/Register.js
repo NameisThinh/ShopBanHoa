@@ -1,5 +1,5 @@
 import React, { Fragment, useState, useEffect } from "react";
-
+import { Link } from "react-router-dom";
 import MetaData from "../layout/MetaData";
 import Loader from "../layout/Loader";
 
@@ -156,6 +156,9 @@ const Register = ({ history }) => {
                 ĐĂNG KÝ
               </button>
             )}
+            <Link to="/login" className="btn color bg-danger">
+              Bạn đã có tài khoản ?
+            </Link>
           </form>
         </div>
       </div>

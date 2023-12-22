@@ -3,11 +3,11 @@ const User = require("../models/user");
 const ErrorHandler = require("../utils/errorHandler");
 const catchAsyncErrors = require("../middlewares/catchAsyncErrors");
 const sendToken = require("../utils/jwtToken");
-
+const nodemailer = require('nodemailer')
 const crypto = require("crypto");
 const cloudinary = require("cloudinary");
 
-// Register a user   => /api/v1/register
+// /api/v1/register
 exports.registerUser = catchAsyncErrors(async (req, res, next) => {
   const { name, email, password, avatar } = req.body;
 
@@ -43,7 +43,7 @@ exports.registerUser = catchAsyncErrors(async (req, res, next) => {
   sendToken(user, 200, res);
 });
 
-// Login User  =>  /a[i/v1/login
+// Login User  =>  /api/v1/login
 exports.loginUser = catchAsyncErrors(async (req, res, next) => {
   const { email, password } = req.body;
 
@@ -174,7 +174,7 @@ exports.getUserDetails = catchAsyncErrors(async (req, res, next) => {
 });
 
 // Update user profile   =>   /api/v1/admin/user/:id
-exports.updateUser = catchAsyncErrors(async (req, res, next) => {
+exports.updateUser = catchAsyncErrors(async (req, res) => {
   const newUserData = {
     name: req.body.name,
     email: req.body.email,
@@ -189,5 +189,43 @@ exports.updateUser = catchAsyncErrors(async (req, res, next) => {
 
   res.status(200).json({
     success: true,
+    user
   });
 });
+
+exports.forgotPassword = catchAsyncErrors( async(req,res)=>{
+  try {
+    const { user_email } = req.body;
+    const user = await User.findOne({ user_email });
+    if (!user) {
+      return res.status(400).send({ message: 'Sorry Email does not Exist!' });
+    }
+    const transporter = nodemailer.createTransport({
+      service: 'gmail',
+      host: 'smtp.gmail.com',
+      port: '587',
+      auth: {
+        user: 'quocthinh00123@gmail.com',
+        pass: '0382510848',
+      },
+      secureConnection: 'false',
+      tls: {
+        ciphers: 'SSLv3',
+        rejectUnauthorized: false,
+      },
+    });
+    const mailOptions = {
+      from: 'quocthinh00123@gmail.com',
+      to: user_email,
+      subject: 'Please Reset your Password',
+      html: '<h3>Dear User</h3><p>You have requested to Reset your password. To Reset your password Successfully, Follow the Link bellow to Reset it</p><p>Click <a href="https://localhost/user/resetPassword.jsps">https://onepercentsoft.oxygen.com/user/resetPassword.jsp</a></p><p>This Email is subject to mandatory instruction.</p><p>Regards,</p><p>Online Service</p>',
+    };
+
+    transporter.sendMail(mailOptions, function (error, info) {
+      if (error) throw error;
+      return res.send({ error: false, data: info, message: 'OK' });
+    });
+  } catch (err) {
+    res.status(500).send({ message: err });
+  }
+})

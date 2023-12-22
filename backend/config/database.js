@@ -3,9 +3,8 @@ const dotenv = require("dotenv").config();
 const connectDB = () => {
   mongoose
     .connect(
-      // "mongodb+srv://quocthinh00123:quocthinh00123@meomeo.joed2ms.mongodb.net/?retryWrites=true&w=majority",
-      // process.env.DB_LOCAL,
-      process.env.DB_URI,
+      // process.env.DB_URI,
+      process.env.DB_LOCAL,
       {
         useNewUrlParser: true,
         useCreateIndex: true,
@@ -16,6 +15,9 @@ const connectDB = () => {
       console.log(
         `MongoDB Database connected with HOST: ${con.connection.host}`
       );
+    })
+    .catch((err) => {
+      console.log("Loi connect");
     });
 };
 

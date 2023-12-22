@@ -10,6 +10,7 @@ import {
   newReviewReducer,
   productReviewsReducer,
   reviewReducer,
+  ascendingProductReduce,
 } from "./reducers/productReducers";
 import {
   authReducer,
@@ -25,20 +26,29 @@ import {
   orderDetailsReducer,
   allOrdersReducer,
   orderReducer,
+  orderPrewDetailsReducer,
 } from "./reducers/orderReducers";
+import { newMessageReduce } from "./reducers/messageReducers";
 
 const reducer = combineReducers({
+  //Products
   products: productsReducer,
   productDetails: productDetailsReducer,
   newProduct: newProductReducer,
   product: productReducer,
   productReviews: productReviewsReducer,
   review: reviewReducer,
+  
+  ascending: ascendingProductReduce,
+
+  // User
   auth: authReducer,
   user: userReducer,
   allUsers: allUsersReducer,
   userDetails: userDetailsReducer,
   forgotPassword: forgotPasswordReducer,
+
+  //Cart
   cart: cartReducer,
   newOrder: newOrderReducer,
   myOrders: myOrdersReducer,
@@ -46,6 +56,11 @@ const reducer = combineReducers({
   orderDetails: orderDetailsReducer,
   order: orderReducer,
   newReview: newReviewReducer,
+  
+  orderPrewDetails:orderPrewDetailsReducer,
+    //messeage
+
+  newMessage: newMessageReduce
 });
 
 let initialState = {

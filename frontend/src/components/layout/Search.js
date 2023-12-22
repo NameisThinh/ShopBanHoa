@@ -20,7 +20,7 @@ const Search = ({ history }) => {
           type="text"
           id="search_field"
           className="form-control"
-          placeholder="Nhập tên sản phẩm cần tìm..."
+          placeholder="Nhập Tên Bông Hoa cần tìm..."
           onChange={(e) => setKeyword(e.target.value)}
         />
         <div className="input-group-append">

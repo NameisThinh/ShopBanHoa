@@ -16,6 +16,11 @@ import {
     ORDER_DETAILS_REQUEST,
     ORDER_DETAILS_SUCCESS,
     ORDER_DETAILS_FAIL,
+
+    ORDER_PREW_DETAILS_REQUEST,
+    ORDER_PREW_DETAILS_SUCCESS,
+    ORDER_PREW_DETAILS_FAIL,
+
     CLEAR_ERRORS
 } from '../constants/orderConstants'
 
@@ -82,6 +87,26 @@ export const getOrderDetails = (id) => async (dispatch) => {
     } catch (error) {
         dispatch({
             type: ORDER_DETAILS_FAIL,
+            payload: error.response.data.message
+        })
+    }
+}
+
+export const getOrderPrewDetails = (id) => async (dispatch) => {
+    try {
+
+        dispatch({ type: ORDER_PREW_DETAILS_REQUEST });
+
+        const { data } = await axios.get(`/api/v1/orders/${id}`)
+
+        dispatch({
+            type: ORDER_PREW_DETAILS_SUCCESS,
+            payload: data.order
+        })
+
+    } catch (error) {
+        dispatch({
+            type: ORDER_PREW_DETAILS_FAIL,
             payload: error.response.data.message
         })
     }

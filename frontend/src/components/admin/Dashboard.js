@@ -1,7 +1,6 @@
 import React, { Fragment, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Doughnut, Line, Radar } from "react-chartjs-2";
-
+import "../../App.css";
 import MetaData from "../layout/MetaData";
 import Loader from "../layout/Loader";
 import Sidebar from "./Sidebar";
@@ -11,7 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAdminProducts } from "../../actions/productActions";
 import { allOrders } from "../../actions/orderActions";
 import { allUsers } from "../../actions/userActions";
-import ChartIncome from "./ChartIncome";
+
 
 const Dashboard = () => {
   const dispatch = useDispatch();
@@ -23,21 +22,6 @@ const Dashboard = () => {
   );
 
   // status order
-  let da_dat_hang = 0;
-  let dang_van_chuyen = 0;
-  let da_giao_hang = 0;
-  orders &&
-    orders.forEach((order) => {
-      if (order.orderStatus === "Đã đặt hàng") {
-        da_dat_hang += 1;
-      }
-      if (order.orderStatus === "Đang vận chuyển") {
-        dang_van_chuyen += 1;
-      }
-      if (order.orderStatus === "Đã giao hàng") {
-        da_giao_hang += 1;
-      }
-    });
 
   useEffect(() => {
     dispatch(getAdminProducts());
@@ -50,95 +34,6 @@ const Dashboard = () => {
     orders.forEach((product) => {
       totalAmountall += product.totalPrice;
     });
-  // Chart Line tính tổng doanh thu
-  const lineState = {
-    labels: ["Số tiền ban đầu", "Tổng danh thu hiện tại"],
-    datasets: [
-      {
-        label: "TỔNG DANH THU",
-        backgroundColor: ["blue"],
-        hoverBackgroundColor: ["rgb(197, 72, 49)"],
-        data: [0, totalAmountall],
-      },
-    ],
-  };
-  // Doughnut tính số lượng hàng còn và hết hàng
-
-  // Doughnut thống kê trạng thái đơn hàng
-  const doughnutStateOrder = {
-    labels: ["Đã đặt hàng", "Đang vận chuyển", "Đã giao hàng"],
-    datasets: [
-      {
-        backgroundColor: ["#00A6B4", "#6800B4", "#FF7F50"],
-        hoverBackgroundColor: ["#FF1493", "#00FA9A", "#FFD700"],
-        data: [da_dat_hang, dang_van_chuyen, da_giao_hang],
-      },
-    ],
-  };
-  // radar chart
-  let kho_giavi = 0;
-  let dong_lanh = 0;
-  let che_bien = 0;
-  let thit_trung_haisan = 0;
-  let rau_cu_traicay = 0;
-  let banh_keo = 0;
-  let do_uong = 0;
-  products &&
-    products.forEach((product) => {
-      if (product.category === "Thực phẩm Khô - Gia Vị") {
-        kho_giavi += 1;
-      }
-      if (product.category === "Rau-Củ-Trái cây") {
-        rau_cu_traicay += 1;
-      }
-      if (product.category === "Đồ uống - Giải khát") {
-        do_uong += 1;
-      }
-      if (product.category === "Bánh kẹo - Đồ ăn vặt") {
-        banh_keo += 1;
-      }
-      if (product.category === "Thực phẩm chế biến") {
-        che_bien += 1;
-      }
-      if (product.category === "Thịt-Trứng-Hải sản") {
-        thit_trung_haisan += 1;
-      }
-      if (product.category === "Thực phẩm đông lạnh") {
-        dong_lanh += 1;
-      }
-    });
-  const data = {
-    labels: [
-      "Thực phẩm khô - Gia vị",
-      "Thực phẩm đông lạnh",
-      "Thực phẩm chế biến",
-      "Thịt - Trứng - Hải sản",
-      "Rau - Củ - Trái cây",
-      "Bánh kẹo - Đồ ăn vặt",
-      "Đồ uống - Giải khát",
-    ],
-    datasets: [
-      {
-        label: "Danh mục sản phẩm",
-        data: [
-          kho_giavi,
-          dong_lanh,
-          che_bien,
-          thit_trung_haisan,
-          rau_cu_traicay,
-          banh_keo,
-          do_uong,
-        ],
-        fill: true,
-        backgroundColor: "rgba(54, 162, 235, 0.2)",
-        borderColor: "rgb(54, 162, 235)",
-        pointBackgroundColor: "rgb(54, 162, 235)",
-        pointBorderColor: "#fff",
-        pointHoverBackgroundColor: "#fff",
-        pointHoverBorderColor: "rgb(54, 162, 235)",
-      },
-    ],
-  };
 
   return (
     <Fragment>
@@ -166,7 +61,9 @@ const Dashboard = () => {
                             Tổng danh thu
                             <br />{" "}
                             <b>
-                              {totalAmount && totalAmount.toLocaleString()} VNĐ
+                              {/* {totalAmount && totalAmount.toLocaleString()}{" "} */}
+                              {totalAmountall && totalAmount.toLocaleString()}{" "}
+                              VNĐ
                             </b>
                           </div>
                         </div>
@@ -243,6 +140,11 @@ const Dashboard = () => {
                   </div>
                 </Fragment>
               )}
+
+<div className='row'>
+
+
+</div>
             </div>
           </div>
         </div>

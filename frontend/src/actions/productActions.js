@@ -19,6 +19,13 @@ import {
   PRODUCT_DETAILS_REQUEST,
   PRODUCT_DETAILS_SUCCESS,
   PRODUCT_DETAILS_FAIL,
+
+  ASC_PRODUCT_REQUEST,
+ASC_PRODUCT_SUCCESS,
+ASC_PRODUCT_FAIL,
+
+DESC_PRODUCT_REQUEST,DESC_PRODUCT_SUCCESS,DESC_PRODUCT_FAIL,
+
   NEW_REVIEW_REQUEST,
   NEW_REVIEW_SUCCESS,
   NEW_REVIEW_FAIL,
@@ -32,12 +39,12 @@ import {
 } from "../constants/productConstants";
 
 export const getProducts =
-  (keyword = "", currentPage = 1, price, category, rating = 0) =>
+  (keyword = "") =>
   async (dispatch) => {
     try {
       dispatch({ type: ALL_PRODUCTS_REQUEST });
 
-      let link = `/api/v1/products?keyword=${keyword}&page=${currentPage}&price[lte]=${price[1]}&price=${price[0]}&ratings=${rating}`;
+      let link = `/api/v1/products?keyword=${keyword}`;
 
       const { data } = await axios.get(link);
 
@@ -222,14 +229,50 @@ export const deleteReview = (id, productId) => async (dispatch) => {
       payload: data.success,
     });
   } catch (error) {
-    console.log(error.response);
-
+  
     dispatch({
       type: DELETE_REVIEW_FAIL,
       payload: error.response.data.message,
     });
   }
 };
+
+// San pham tăng dần
+export const getProductAscending = ()=> async (dispatch)=>{
+  try{
+    dispatch({ type: ASC_PRODUCT_REQUEST });
+    const { data } = await axios.get(`/api/v1/product/sort/asc`)
+    dispatch({
+      type: ASC_PRODUCT_SUCCESS,
+      payload: data.product,
+    });
+    
+  }catch(error){
+
+    dispatch({
+      type: ASC_PRODUCT_FAIL,
+      payload: error.response.data.message,
+    });
+  }
+}
+export const getProductsDesc = () => async (dispatch) => {
+  try {
+    dispatch({ type: DESC_PRODUCT_REQUEST });
+
+    const { data } = await axios.get(`/api/v1/product/sort/desc`);
+
+    dispatch({
+      type: DESC_PRODUCT_SUCCESS,
+      payload: data.products,
+    });
+  } catch (error) {
+    dispatch({
+      type: DESC_PRODUCT_FAIL,
+      payload: error.response.data.message,
+    });
+  }
+};
+
 
 // Clear Errors
 export const clearErrors = () => async (dispatch) => {

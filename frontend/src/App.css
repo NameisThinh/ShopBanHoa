@@ -5,6 +5,7 @@ body {
   height: 100%;
   margin: 0;
   padding: 0;
+  color: #858796;
   overflow-x: hidden;
   box-sizing: border-box;
 }
@@ -109,8 +110,9 @@ nav {
 }
 
 .card-img-top {
-  width: 200px;
-  height: 150px;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .ratings {
@@ -329,7 +331,7 @@ footer {
 
 .wrapper form a {
   font-size: 0.9rem;
-  color: grey;
+  color: #333;
 }
 
 /* Avatar */
@@ -468,16 +470,6 @@ footer {
 .order-confirm p,
 .order-details p {
   margin-left: 1.5rem;
-}
-
-.update-btn {
-  background-color: #4169e1;
-  border-color: #4169e1;
-  color: white;
-}
-
-.update-btn:hover {
-  color: white;
 }
 
 /* Pagination */
@@ -678,12 +670,12 @@ circle {
     stroke-dashoffset: -125px;
   }
 }
-.lineChart {
+/* .lineChart {
   width: 80%;
   margin: auto;
-}
+} */
 
-.chart {
+/* .chart {
   margin: 20px;
   padding: 20px;
   -webkit-box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
@@ -692,7 +684,7 @@ circle {
 
 .chartTitle {
   margin-bottom: 20px;
-}
+} */
 
 #ul_top_hypers li {
   display: inline;
@@ -713,50 +705,23 @@ circle {
 }
 
 .button {
-  background: #2366be;
+  background: var(--pink);
   margin: 20px auto;
   width: 200px;
   height: 50px;
   overflow: hidden;
   text-align: center;
+  margin-left: 3px;
   transition: 0.2s;
   cursor: pointer;
   border-radius: 3px;
-  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2);
-}
 
-.btnTwo {
-  position: relative;
-  width: 200px;
-  height: 100px;
-  margin-top: -100px;
-  padding-top: 2px;
-  background: #159906;
-  left: -250px;
-  transition: 0.3s;
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2);
 }
 
 .btnText {
   color: white;
-  transition: 0.3s;
-}
 
-.btnText2 {
-  margin-top: 63px;
-  margin-right: -130px;
-  color: #fff;
-}
-
-.button:hover .btnTwo {
-  left: -130px;
-}
-
-.button:hover .btnText {
-  margin-left: 65px;
-}
-
-.button:active {
-  box-shadow: 0px 5;
 }
 
 .doughnutChart {

@@ -5,7 +5,7 @@ const catchAsyncErrors = require("../middlewares/catchAsyncErrors");
 const APIFeatures = require("../utils/apiFeatures");
 const cloudinary = require("cloudinary");
 
-// Create new product   =>   /api/v1/admin/product/new
+// Admin thêm sản phẩm   =>   /api/v1/admin/product/new
 exports.newProduct = catchAsyncErrors(async (req, res, next) => {
   let images = [];
   if (typeof req.body.images === "string") {
@@ -61,7 +61,7 @@ exports.getProducts = catchAsyncErrors(async (req, res, next) => {
       filteredProductsCount,
       products,
     });
-  }, 2000);
+  }, 1000);
 });
 
 // Get all products (Admin)  =>   /api/v1/admin/products
@@ -73,7 +73,17 @@ exports.getAdminProducts = catchAsyncErrors(async (req, res, next) => {
     products,
   });
 });
-
+//Get product with price => /api/v1/product/id/price
+exports.getPriceProduct = catchAsyncErrors(async (req, res, next) => {
+  const product = await Product.findOne(req.params.id && req.params.price);
+  if (!product) {
+    return next(new ErrorHandler("Không tìm thấy sản phẩm", 404));
+  }
+  res.status(200).json({
+    success: true,
+    product,
+  });
+});
 // Get single product details   =>   /api/v1/product/:id
 exports.getSingleProduct = catchAsyncErrors(async (req, res, next) => {
   const product = await Product.findById(req.params.id);
@@ -88,7 +98,7 @@ exports.getSingleProduct = catchAsyncErrors(async (req, res, next) => {
   });
 });
 
-// Update Product   =>   /api/v1/admin/product/:id
+// Admin Update Product   =>   /api/v1/admin/product/:id
 exports.updateProduct = catchAsyncErrors(async (req, res, next) => {
   let product = await Product.findById(req.params.id);
 
@@ -139,10 +149,9 @@ exports.updateProduct = catchAsyncErrors(async (req, res, next) => {
   });
 });
 
-// Delete Product   =>   /api/v1/admin/product/:id
+// Admin Delete Product   =>   /api/v1/admin/product/:id
 exports.deleteProduct = catchAsyncErrors(async (req, res, next) => {
   const product = await Product.findById(req.params.id);
-
   if (!product) {
     return next(new ErrorHandler("Không tìm thấy sản phẩm", 404));
   }
@@ -174,9 +183,9 @@ exports.createProductReview = catchAsyncErrors(async (req, res, next) => {
   };
 
   const product = await Product.findById(productId);
-
+  //
   const isReviewed = product.reviews.find(
-    (r) => r.user.toString() === req.user._id.toString()
+    (e) => e.user.toString() === req.user._id.toString()
   );
 
   if (isReviewed) {
@@ -187,6 +196,7 @@ exports.createProductReview = catchAsyncErrors(async (req, res, next) => {
       }
     });
   } else {
+    //
     product.reviews.push(review);
     product.numOfReviews = product.reviews.length;
   }
@@ -222,8 +232,6 @@ exports.getProductReviews = catchAsyncErrors(async (req, res, next) => {
 exports.deleteReview = catchAsyncErrors(async (req, res, next) => {
   const product = await Product.findById(req.query.productId);
 
-  console.log(product);
-
   const reviews = product.reviews.filter(
     (review) => review._id.toString() !== req.query.id.toString()
   );
@@ -252,3 +260,71 @@ exports.deleteReview = catchAsyncErrors(async (req, res, next) => {
     success: true,
   });
 });
+
+// Sap xep tang dan 
+//   api/v1/product/sort/asc
+exports.getProductAscending= catchAsyncErrors(async(req,res)=>{
+  try{
+    const ascProduct = await Product.find().sort({price: 1})
+    res.status(200).json({
+      success: true,
+      ascProduct,
+    })
+
+  } catch(err){
+    res.status(500).json({
+      message:err
+    })
+  }
+})
+
+/// sap xep giam dan
+
+// api/v1/product/sort/desc
+exports.getProductDescing= catchAsyncErrors(async(req,res)=>{
+  try{
+    const descProduct = await Product.find().sort({price: -1})
+    res.status(200).json({
+      success: true,
+      descProduct,
+    })
+
+  } catch(err){
+    res.status(500).json({
+      message:err
+    })
+  }
+})
+
+
+
+// Khoang Gia 
+exports.getProductRangePrice = catchAsyncErrors(async (req,res)=>{
+const { minPrice, maxPrice } = req.query;
+
+try {
+  const query = {};
+  if (minPrice) {
+    query.price = { $gte: minPrice };
+  }
+  if (maxPrice) {
+    if (query.price) {
+      query.price.$lte = maxPrice;
+    } else {
+      query.price = { $lte: maxPrice };
+    }
+  }
+
+  // Find products based on the query
+  const filteredProducts = await Product.find(query);
+
+  res.status(200).json({
+    success:true,
+    filteredProducts
+  })
+} catch (error) {
+  res.status(500).json({ error: 'Internal Server Error' });
+}
+
+
+})

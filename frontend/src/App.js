@@ -24,11 +24,11 @@ import Register from "./components/user/Register";
 import Profile from "./components/user/Profile";
 import UpdateProfile from "./components/user/UpdateProfile";
 import UpdatePassword from "./components/user/UpdatePassword";
-import LookAccount from "./components/admin/LookAccount";
+import LockAccount from "./components/admin/LookAccount";
 
 // Admin Imports
 import Dashboard from "./components/admin/Dashboard";
-import ProductsList from "./components/admin/ProductsList";
+import DeleteProduct from "./components/admin/ProductList";
 import NewProduct from "./components/admin/NewProduct";
 import UpdateProduct from "./components/admin/UpdateProduct";
 import OrdersList from "./components/admin/OrdersList";
@@ -37,7 +37,7 @@ import UsersList from "./components/admin/UsersList";
 import UpdateUser from "./components/admin/UpdateUser";
 import ProductReviews from "./components/admin/ProductReviews";
 
-import ProtectedRoute from "./components/route/ProtectedRoute";
+import ProtectedRoute from "./components/ProtectedRoute";
 import { loadUser } from "./actions/userActions";
 import store from "./store";
 import axios from "axios";
@@ -46,6 +46,9 @@ import { useSelector } from "react-redux";
 // Payment
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
+import ProductList from "./components/product/ProductList";
+import Product from "./components/product/Product";
+import CheckProduct from "./components/product/CheckProduct";
 
 function App() {
   const [stripeApiKey, setStripeApiKey] = useState("");
@@ -69,9 +72,10 @@ function App() {
         <Header></Header>
         <div>
           <Route path="/" component={Home} exact />
-          <Route path="/search/:keyword" component={Home} />
           <Route path="/product/:id" component={ProductDetails} exact />
-
+          <Route path="/product" component={ProductList} exact />
+          <Route path="/search/:keyword" component={ProductList} exact />
+          <Route path="/check-dh" component={CheckProduct} exact />
           {!loading && (!isAuthenticated || user.role !== "admin") && (
             <Route path="/cart" component={Cart} exact />
           )}
@@ -114,7 +118,7 @@ function App() {
         <ProtectedRoute
           path="/admin/products"
           isAdmin={true}
-          component={ProductsList}
+          component={DeleteProduct}
           exact
         />
         <ProtectedRoute
@@ -162,7 +166,7 @@ function App() {
         <ProtectedRoute
           path="/admin/look_user/:id"
           isAdmin={true}
-          component={LookAccount}
+          component={LockAccount}
           exact
         />
 

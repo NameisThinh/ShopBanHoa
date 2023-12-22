@@ -81,8 +81,11 @@ const Login = ({ history, location }) => {
                   ĐĂNG NHẬP
                 </button>
 
-                <Link to="/register" className="float-right mt-3 ">
-                  Bạn chưa có tài khoản?
+                <Link
+                  to="/register"
+                  className=" mt-4 btn bg-warning text-black p-2"
+                >
+                  Bạn chưa có tài khoản?  Hãy đăng ký tài khoản .
                 </Link>
               </form>
             </div>

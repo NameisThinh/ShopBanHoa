@@ -4,46 +4,50 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const crypto = require("crypto");
 
-const userSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: [true, "Tên không được để trống"],
-    maxLength: [30, "Tên của bạn không được vượt quá 30 ký tự"],
-  },
-  email: {
-    type: String,
-
-    required: [true, "Email không được để trống"],
-    unique: true,
-    validate: [validator.isEmail, "Vui lòng nhập địa chỉ email hợp lệ"],
-  },
-  password: {
-    type: String,
-    required: [true, "Mật khẩu không được để trống"],
-    minlength: [6, "Mật khẩu của bạn phải dài hơn 6 ký tự"],
-    select: false,
-  },
-  avatar: {
-    public_id: {
+const userSchema = new mongoose.Schema(
+  {
+    name: {
       type: String,
-      required: true,
+      required: [true, "Tên không được để trống"],
+      maxLength: [30, "Tên của bạn không được vượt quá 30 ký tự"],
     },
-    url: {
+    email: {
       type: String,
-      required: true,
+      required: [true, "Email không được để trống"],
+      unique: true,
+      validate: [validator.isEmail, "Vui lòng nhập địa chỉ email hợp lệ"],
     },
+    password: {
+      type: String,
+      required: [true, "Mật khẩu không được để trống"],
+      minlength: [6, "Mật khẩu của bạn phải dài hơn 6 ký tự"],
+      select: false,
+    },
+    avatar: {
+      public_id: {
+        type: String,
+        required: true,
+      },
+      url: {
+        type: String,
+        required: true,
+      },
+    },
+    role: {
+      type: String,
+      default: "user",
+    },
+    createdAt: {
+      type: Date,
+      default: Date.now,
+    },
+    resetPasswordToken: String,
+    resetPasswordExpire: Date,
   },
-  role: {
-    type: String,
-    default: "user",
-  },
-  createdAt: {
-    type: Date,
-    default: Date.now,
-  },
-  resetPasswordToken: String,
-  resetPasswordExpire: Date,
-});
+  {
+    collection: "Users",
+  }
+);
 
 // Encrypting password before saving user
 userSchema.pre("save", async function (next) {
@@ -67,20 +71,20 @@ userSchema.methods.getJwtToken = function () {
 };
 
 // Generate password reset token
-userSchema.methods.getResetPasswordToken = function () {
-  // Generate token
-  const resetToken = crypto.randomBytes(20).toString("hex");
+// userSchema.methods.getResetPasswordToken = function () {
+//   // Generate token
+//   const resetToken = crypto.randomBytes(20).toString("hex");
 
-  // Hash and set to resetPasswordToken
-  this.resetPasswordToken = crypto
-    .createHash("sha256")
-    .update(resetToken)
-    .digest("hex");
+//   // Hash and set to resetPasswordToken
+//   this.resetPasswordToken = crypto
+//     .createHash("sha256")
+//     .update(resetToken)
+//     .digest("hex");
 
-  // Set token expire time
-  this.resetPasswordExpire = Date.now() + 30 * 60 * 1000;
+//   // Set token expire time
+//   this.resetPasswordExpire = Date.now() + 30 * 60 * 1000;
 
-  return resetToken;
-};
+//   return resetToken;
+// };
 
 module.exports = mongoose.model("User", userSchema);

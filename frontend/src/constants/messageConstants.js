@@ -1,0 +1,6 @@
+export const MESSAGE_REQUEST = 'MESSAGE_REQUEST'
+export const MESSAGE_SUCCESS = 'MESSAGE_SUCCESS'
+export const MESSAGE_FAIL = 'MESSAGE_FAIL'
+
+
+export const CLEAR_ERRORS = 'CLEAR_ERRORS'

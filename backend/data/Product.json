@@ -1,0 +1,85 @@
+[{
+  "price": 200000,
+  "ratings": 0,
+  "stock": 100,
+  "numOfReviews": 0,
+  "name": "Hoa Hồng",
+  "description": "Hoa Hồng luôn được mệnh danh là biểu tượng của tình yêu, là ngôn ngữ của trái tim. Mọi người thường trao cho nhau những giỏ hoa Hồng xinh xắn để bày tỏ tình cảm chân thành của mình. Thế nhưng, không phải ai cũng hiểu hết những bí ẩn đằng sau mỗi bó hồng. Bởi tùy vào số lượng mà mỗi bó hồng sẽ truyền đi những thông điệp khác nhau. Hãy cùng Dalat Hasfarm tìm hiểu về ý nghĩa của số lượng các đóa hoa hồng nhé!",
+  "seller": "NQT",
+  "images": [
+    {
+      "_id": {
+        "$oid": "646ef409509f2531e4dfd453"
+      },
+      "public_id": "products/rzfpvr5lkscycprnvfru",
+      "url": "https://res.cloudinary.com/dlkdldclp/image/upload/v1684993034/products/rzfpvr5lkscycprnvfru.jpg"
+    }
+  ],
+  "reviews": [],
+  "createdAt": {
+    "$date": "2023-05-25T05:37:13.419Z"
+  }
+},{
+  "price": 100000,
+  "ratings": 0,
+  "stock": 200,
+  "numOfReviews": 0,
+  "name": "Hoa Trắng",
+  "description": "Hoa cúc trắng nhỏ hay còn gọi là cúc họa mi trắng là một loài hoa thuộc họ cúc tây. Người Hy Lạp cổ gọi loài hoa này là Asteraceae với ý nghĩa là  \"ngôi sao nhỏ\". Hoặc như trong văn hóa nước Anh, cúc họa mi có tên là Daisy (một trong những cái tên được đặt cho các cô gái đẹp). Bởi lẽ hoa này nở cùng với ánh sáng ban mai rồi khép lại những cánh trắng khi chiều xuống. Do đó người ta cũng hay gọi nó bằng một cái tên mỹ miều Saxon, day’s eye - con mắt ban ngày.",
+  "seller": "NQT",
+  "images": [
+    {
+      "_id": {
+        "$oid": "64708df8f1d04425a88c468c"
+      },
+      "public_id": "products/yr7cn7op83tipui0n5wd",
+      "url": "https://res.cloudinary.com/dlkdldclp/image/upload/v1685097979/products/yr7cn7op83tipui0n5wd.jpg"
+    }
+  ],
+  "reviews": [],
+  "createdAt": {
+    "$date": "2023-05-26T10:46:16.594Z"
+  }
+},{
+  "price": 100000,
+  "ratings": 0,
+  "stock": 1000,
+  "numOfReviews": 0,
+  "name": "Hoa Cúc",
+  "description": "Hoa cúc thể hiện sự ngây thơ và vẻ đẹp thanh khiết. Các màu sắc khác nhau của hoa cúc mang ý nghĩa tượng trưng khác nhau, ví dụ như cúc vàng tượng trưng cho lòng biết ơn và ý chí mạnh mẽ. Trong ngôn ngữ của các loài hoa, hoa cúc mang ý nghĩa tượng trưng cho tình yêu tận tụy, lòng trung thành, hạnh phúc, trường thọ và niềm vui. Hoa cúc cũng là loài hoa chính thức cho ngày sinh tháng 11. Hoa cúc được sử dụng nhiều trong những ngày lễ và sự kiện quan trọng của người dân Việt Nam, và thường được dùng để tưởng nhớ về người thân.",
+  "seller": "NQT",
+  "images": [
+    {
+      "_id": {
+        "$oid": "64708f50f1d04425a88c469f"
+      },
+      "public_id": "products/ywdxwccknfvsvdtcmz98",
+      "url": "https://res.cloudinary.com/dlkdldclp/image/upload/v1685098322/products/ywdxwccknfvsvdtcmz98.jpg"
+    }
+  ],
+  "reviews": [],
+  "createdAt": {
+    "$date": "2023-05-26T10:52:00.057Z"
+  }
+},{
+  "price": 100000,
+  "ratings": 0,
+  "stock": 10,
+  "numOfReviews": 0,
+  "name": "Hoa Mặt Trời",
+  "description": "Hoa Mặt Trời đại diện của mặt trời, tượng trưng cho niềm đam mê mãnh liệt, sự tươi sáng và vui vẻ12. Đối với người Việt Nam, ý nghĩa của hoa mặt trời chính là biểu tượng của một tình yêu sắt son, chung thủy một lòng hướng về người mình yêu. Giống như loài hoa cánh vàng rực này luôn hướng về phía mặt trời không bao giờ quay đầu nhìn lại3.",
+  "seller": "NQT",
+  "images": [
+    {
+      "_id": {
+        "$oid": "64708fcdf1d04425a88c46a8"
+      },
+      "public_id": "products/nmy7qgqhexdm1z6rpt9f",
+      "url": "https://res.cloudinary.com/dlkdldclp/image/upload/v1685098448/products/nmy7qgqhexdm1z6rpt9f.jpg"
+    }
+  ],
+  "reviews": [],
+  "createdAt": {
+    "$date": "2023-05-26T10:54:05.737Z"
+  }
+}]

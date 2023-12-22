@@ -9,6 +9,7 @@ import {
   updateProduct,
   getProductDetails,
   clearErrors,
+  deleteProduct,
 } from "../../actions/productActions";
 import { UPDATE_PRODUCT_RESET } from "../../constants/productConstants";
 
@@ -60,7 +61,7 @@ const UpdateProduct = ({ match, history }) => {
 
     if (isUpdated) {
       history.push("/admin/products");
-      alert.success("Product updated successfully");
+      alert.success("Cap nhat san pham thanh cong");
       dispatch({ type: UPDATE_PRODUCT_RESET });
     }
   }, [
@@ -89,6 +90,9 @@ const UpdateProduct = ({ match, history }) => {
     });
 
     dispatch(updateProduct(product._id, formData));
+  };
+  const deleteProductHandler = (id) => {
+    dispatch(deleteProduct(id));
   };
 
   const onChange = (e) => {

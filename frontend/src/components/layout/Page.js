@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom/cjs/react-router-dom.min";
+import { Link } from "react-router-dom";
 import "./Header.css";
 export default function Page() {
   return (
@@ -12,7 +12,7 @@ export default function Page() {
           bông hoa ở các miền trên đất nước , đảm bảo chất lượng . Uy tín hàng
           đầu
         </p>
-        <Link to="/" className="btnn">
+        <Link to="/product" className="btnn">
           Shop now
         </Link>
       </div>
